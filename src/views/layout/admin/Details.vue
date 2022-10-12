@@ -5,30 +5,25 @@
             <p style="text-align: center;font: normal normal bold 35px/40px Neuzeit Grotesk;letter-spacing: -1.05px;color: #2E304E;">Your Details</p>
 
             <div class="p-10">
-                <div class="grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
+                <div class="grid gap-3">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-sm text-gray-500">First name <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered">
+                            <label class="font-bold mb-2 text-black">First name <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="firstName">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-sm text-gray-500">Email Address <span class="text-red-500">*</span> </label>
-                            <input type="email" class="input input-bordered">
+                            <label class="font-bold mb-2 text-black">Email Address <span class="text-red-500">*</span> </label>
+                            <input type="email" class="input input-bordered" v-model="email">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-sm text-gray-500">Last name <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered">
-                        </div>
-                        <div class="form-control">
-                            <label class="font-bold mb-2 text-sm text-gray-500">Phone Number <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered">
+                            <label class="font-bold mb-2 text-black">Last name <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="lastName ">
                         </div>
                 </div>
             </div>
-          <div class="mt-8 mx-8 lg:mx-15 flex flex-wrap">
-            <a class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8" style="background-color:#2E304E;color:white;border-radius:25px;" href="#">
-            <span>Continue</span>
-            <span class="font-medium text-gray-300 ml-2">➔</span>
-          </a>
+          <div class="mt-2">
+            <a v-on:click="saveDetails" class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8" style="background-color:#2E304E;color:white;border-radius:25px;" href="#">
+              <span>Continue</span>
+            </a>
           </div>
       </div>
     </div>
@@ -37,6 +32,24 @@
 <script>
 export default {
     name: "Details",
+    data () {
+        return {
+            firstName : '',
+            lastName : '',
+            email : '',
+        }
+    },
+    methods : {
+      saveDetails() {
+          sessionStorage.setItem("profile" , JSON.stringify({
+            "firstName" : this.firstName,
+            "lastName" : this.lastName,
+            "email" : this.email
+          }));
+
+          this.$router.push({name : "BusinessDetails"})
+      }
+    }
 }
 </script>
 

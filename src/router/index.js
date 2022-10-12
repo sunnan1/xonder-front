@@ -5,13 +5,16 @@ const routes = [
     path: "/details",
     name: "Details",
     component: () => import("@/views/layout/admin/Details.vue"),
-    meta: { guestOnly: true },
   },
   {
     path: "/",
     name: "Home",
     component: () => import("@/views/pages/website/Home.vue"),
-    meta: { guestOnly: true },
+  },
+  {
+    path: "/business-details",
+    name: "BusinessDetails",
+    component: () => import("@/views/layout/admin/BusinessDetails.vue"),
   },
 ];
 

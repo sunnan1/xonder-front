@@ -30,7 +30,7 @@
               </a>
            </li>
            <li class="nav-item">
-             <router-link :to="{name:'Contact-Us'}" class="px-4 py-2 flex items-center mr-2 font-sm  text-slate-800 hover:text-orange-500">
+             <router-link :to="{name:'Home'}" class="px-4 py-2 flex items-center mr-2 font-sm  text-slate-800 hover:text-orange-500">
               <button class="btn rounded-full " disabled="" data-v-c7f7d2ce="" style="background-color: white;color: #2F3451;"> OPEN AN ACCOUNT </button>
              </router-link>
            </li>
