@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+import request from '../../../api/business/requests';
 export default {
     name: "Details",
     data () {
@@ -41,13 +42,23 @@ export default {
     },
     methods : {
       saveDetails() {
+        
           sessionStorage.setItem("profile" , JSON.stringify({
             "firstName" : this.firstName,
             "lastName" : this.lastName,
             "email" : this.email
           }));
-
-          this.$router.push({name : "BusinessDetails"})
+          request.saveDetails({
+            "firstName" : this.firstName,
+            "lastName" : this.lastName,
+            "email" : this.email
+          })
+          this.$router.push({name : "BusinessDetails"});
+      }
+    },
+    mounted() {
+      if (sessionStorage.getItem('accountType') != 'business' && sessionStorage.getItem('accountType') != 'sole') {
+          this.$router.push({name : "Home"});
       }
     }
 }

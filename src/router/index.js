@@ -16,6 +16,16 @@ const routes = [
     name: "BusinessDetails",
     component: () => import("@/views/layout/admin/BusinessDetails.vue"),
   },
+  {
+    path: "/financial-details",
+    name: "FinancialDetails",
+    component: () => import("@/views/layout/admin/Financial.vue"),
+  },
+  {
+    path: "/upload-photo",
+    name: "UploadPhoto",
+    component: () => import("@/views/layout/admin/Photo.vue"),
+  },
 ];
 
 const router = createRouter({

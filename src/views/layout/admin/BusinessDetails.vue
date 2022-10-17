@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-3xl mx-auto my-12 bg-white px-8" style="margin-top:10%;border-radius:30px;">
+    <div class="max-w-3xl mx-auto my-12 bg-white px-8" style="margin-top:5%;border-radius:30px;">
     <div class="relative block md:flex items-center">
       <div class="w-full relative z-0 md:px-0 md:py-10 text-center">
             <p style="text-align: center;font: normal normal bold 35px/40px Neuzeit Grotesk;letter-spacing: -1.05px;color: #2E304E;">Business Details</p>
@@ -16,15 +16,15 @@
                         </div>
                         <div class="form-control">
                             <label class="font-bold mb-2 text-black">Trading Address <span class="text-red-500">*</span> </label>
-                            <textarea class="input" cols="30" rows="20" v-model="tradingAddress"></textarea>
+                            <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="tradingAddress"></textarea>
                         </div>
                         <div class="form-control">
                             <label class="font-bold mb-2 text-black">Business Description <span class="text-red-500">*</span> </label>
-                            <textarea class="input" cols="30" rows="20" v-model="businessDescription"></textarea>
+                            <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="businessDescription"></textarea>
                         </div>
                         <div class="form-control">
                             <label class="font-bold mb-2 text-black">Web Address <span class="text-red-500">*</span> </label>
-                            <input type="url" class="input input-bordered" v-model="webAddress">
+                            <input type="text" class="input input-bordered" v-model="webAddress">
                         </div>
                 </div>
             </div>
@@ -59,7 +59,16 @@ export default {
             obj.businessDescription = this.businessDescription;
             obj.webAddress = this.webAddress;
             sessionStorage.setItem('profile' , JSON.stringify(obj));
-            this.$router.push({name : "BusinessDetails"})
+
+            this.$router.push({name : "FinancialDetails"});
+      }
+    },
+    mounted() {
+      if (sessionStorage.getItem('accountType') != 'business' && sessionStorage.getItem('accountType') != 'sole') {
+          this.$router.push({name : "Home"});
+      }
+      if (! sessionStorage.getItem('profile')) {
+          this.$router.push({name : "Details"});
       }
     }
 }
