@@ -42,6 +42,7 @@
   </div>
 </template>
 <script>
+import request from '../../../api/business/requests';
 export default {
     name: "FinancialDetails",
     data () {
@@ -65,13 +66,16 @@ export default {
             obj.averageAmountWeek = this.averageAmountWeek;
             sessionStorage.setItem('profile' , JSON.stringify(obj));
 
-            this.$router.push({name : "UploadPhoto"});
+            request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
+            if (res.data == 1) {
+                this.$router.push({name : "UploadPhotoID"});
+            } else {
+              alert(res.data);
+            }
+          });
       }
     },
     mounted() {
-      if (sessionStorage.getItem('accountType') != 'business' && sessionStorage.getItem('accountType') != 'sole') {
-          this.$router.push({name : "Home"});
-      }
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
       }

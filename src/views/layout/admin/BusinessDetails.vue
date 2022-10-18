@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import request from '../../../api/business/requests';
 export default {
     name: "BusinessDetails",
     data () {
@@ -58,14 +59,16 @@ export default {
             obj.businessDescription = this.businessDescription;
             obj.webAddress = this.webAddress;
             sessionStorage.setItem('profile' , JSON.stringify(obj));
-
-            this.$router.push({name : "FinancialDetails"});
+            request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
+                if (res.data == 1) {
+                    this.$router.push({name : "FinancialDetails"});
+                } else {
+                alert(res.data);
+                }
+            });
       }
     },
     mounted() {
-      if (sessionStorage.getItem('accountType') != 'business' && sessionStorage.getItem('accountType') != 'sole') {
-          this.$router.push({name : "Home"});
-      }
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
       }

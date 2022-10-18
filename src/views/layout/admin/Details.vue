@@ -48,9 +48,9 @@ export default {
             "email" : this.email,
             'accountType' : sessionStorage.getItem('accountType'),
           }));
-          request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then(function(res) {
+          request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
             if (res.data == 1) {
-              this.router.push({name : "BusinessDetails"});
+              this.$router.push({name : "BusinessDetails"});
             } else {
               alert(res.data);
             }
@@ -58,7 +58,7 @@ export default {
       }
     },
     mounted() {
-      if (sessionStorage.getItem('accountType') != 'business' && sessionStorage.getItem('accountType') != 'sole') {
+      if (! sessionStorage.getItem('accountType')) {
           this.$router.push({name : "Home"});
       }
     }

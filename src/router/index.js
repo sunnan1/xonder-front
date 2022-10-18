@@ -23,8 +23,23 @@ const routes = [
   },
   {
     path: "/upload-photo",
-    name: "UploadPhoto",
-    component: () => import("@/views/layout/admin/Photo.vue"),
+    name: "UploadPhotoID",
+    component: () => import("@/views/layout/admin/PhotoID.vue"),
+  },
+  {
+    path: "/upload-license",
+    name: "UploadLicense",
+    component: () => import("@/views/layout/admin/License.vue"),
+  },
+  {
+    path: "/upload-permit",
+    name: "UploadPermits",
+    component: () => import("@/views/layout/admin/ResidencePermit.vue"),
+  },
+  {
+    path: "/upload-passport",
+    name: "UploadPassports",
+    component: () => import("@/views/layout/admin/UKPassport.vue"),
   },
 ];
 
