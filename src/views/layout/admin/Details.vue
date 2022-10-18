@@ -42,18 +42,19 @@ export default {
     },
     methods : {
       saveDetails() {
-        
           sessionStorage.setItem("profile" , JSON.stringify({
             "firstName" : this.firstName,
             "lastName" : this.lastName,
-            "email" : this.email
+            "email" : this.email,
+            'accountType' : sessionStorage.getItem('accountType'),
           }));
-          request.saveDetails({
-            "firstName" : this.firstName,
-            "lastName" : this.lastName,
-            "email" : this.email
-          })
-          this.$router.push({name : "BusinessDetails"});
+          request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then(function(res) {
+            if (res.data == 1) {
+              this.router.push({name : "BusinessDetails"});
+            } else {
+              alert(res.data);
+            }
+          });
       }
     },
     mounted() {

@@ -52,7 +52,6 @@ export default {
     methods : {
         saveDetails() {
             var obj = JSON.parse(sessionStorage.getItem("profile"));
-            console.log(obj);
             obj.businessName = this.businessName;
             obj.tradingName = this.tradingName;
             obj.tradingAddress = this.tradingAddress;
