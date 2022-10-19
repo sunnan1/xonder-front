@@ -43,7 +43,7 @@ export default {
             request.savePassport(formData)
             .then((res) => {
                 if (res.data == 1) {
-                    //this.$router.push({name : "Permit"});
+                    this.$router.push({name : "Profile"});
                 }
                 else {
                     alert(res.data)

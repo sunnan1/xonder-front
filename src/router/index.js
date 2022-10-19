@@ -41,6 +41,11 @@ const routes = [
     name: "UploadPassports",
     component: () => import("@/views/layout/admin/UKPassport.vue"),
   },
+  {
+    path: "/complete-application",
+    name: "Profile",
+    component: () => import("@/views/layout/admin/ShowDetails.vue"),
+  },
 ];
 
 const router = createRouter({
