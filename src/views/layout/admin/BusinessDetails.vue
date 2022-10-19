@@ -71,6 +71,13 @@ export default {
     mounted() {
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
+      } else {
+        var obj = JSON.parse(sessionStorage.getItem("profile"));
+        request.getDetails({
+            email : obj.email
+        }).then((res) => {
+                console.log(res.data)
+        });
       }
     }
 }

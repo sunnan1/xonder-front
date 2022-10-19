@@ -16,4 +16,19 @@ export default {
     async savePassport(form) {
         return Api.post("/save-passport", form);
     },
+    async getDetails(form) {
+        return Api.post("/get-details", form);
+    },
+    async getPhoto(form) {
+        return Api.post("/get-photo", form);
+    },
+    async getPassport(form) {
+        return Api.post("/get-passport", form);
+    },
+    async getLicense(form) {
+        return Api.post("/get-license", form);
+    },
+    async getPermit(form) {
+        return Api.post("/get-permit", form);
+    },
 };
