@@ -31,4 +31,7 @@ export default {
     async getPermit(form) {
         return Api.post("/get-permit", form);
     },
+    async complete(form) {
+        return Api.post("/complete", form);
+    },
 };

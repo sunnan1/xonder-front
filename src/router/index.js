@@ -46,6 +46,11 @@ const routes = [
     name: "Profile",
     component: () => import("@/views/layout/admin/ShowDetails.vue"),
   },
+  {
+    path: "/success",
+    name: "ApplicationSubmitted",
+    component: () => import("@/views/layout/admin/ApplicationConfirmation.vue"),
+  },
 ];
 
 const router = createRouter({
