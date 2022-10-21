@@ -120,7 +120,7 @@ export default {
             email : obj.email
           }).then((res) => {
             if (res.data == 1) {
-              this.$router.push({name : "Confirmed"});
+              this.$router.push({name : "ApplicationSubmitted"});
             } else {
               alert(res.data);
             }
