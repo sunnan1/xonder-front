@@ -17,14 +17,14 @@
          <ul class="flex flex-col lg:items-center lg:flex-row list-none ml-auto">
            <li class="nav-item">
              <a 
-                class="px-4 py-2 flex items-center mr-2 font-sm"
+                class="px-4 py-2 flex items-center mr-2 font-sm text-white"
               >
                Business Account
             </a>
            </li>
            <li class="nav-item">
              <a 
-                class="px-4 py-2 flex items-center mr-2 font-sm"
+                class="px-4 py-2 flex items-center mr-2 font-sm text-white"
               >
                FAQ
               </a>
@@ -133,3 +133,7 @@ export default {
   },
 };
 </script>
+<style>
+html {
+    background: #3A4063 !important;
+}</style>

@@ -7,28 +7,28 @@
             <div class="p-10">
                 <div class="grid gap-3">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Expected annual turnover (£): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="expectedTurnOver">
+                            <label class="font-bold mb-2 text-black text-left">Expected annual turnover (£): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="expectedTurnOver" maxlength="8">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average single payment incoming (£): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="singlePaymentIncome">
+                            <label class="font-bold mb-2 text-black text-left">Average single payment incoming (£): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="singlePaymentIncome" maxlength="8">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average single payment outgoing (£): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="singlePaymentOutgoing">
+                            <label class="font-bold mb-2 text-black text-left">Average single payment outgoing (£): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="singlePaymentOutgoing" maxlength="8">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Typical large payment you would receive into account (£): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="largePaymentReceiveAccount">
+                            <label class="font-bold mb-2 text-black text-left">Typical large payment you would receive into account (£): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="largePaymentReceiveAccount" maxlength="8">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Typical large payment you would transfer out the account (£): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="largePaymentTransferAccount">
+                            <label class="font-bold mb-2 text-black text-left">Typical large payment you would transfer out the account (£): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="largePaymentTransferAccount" maxlength="8">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average payment volume per week (number of payments in total in/out the account): <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="averageAmountWeek">
+                            <label class="font-bold mb-2 text-black text-left">Average payment volume per week (number of payments in total in/out the account): <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="averageAmountWeek" maxlength="8">
                         </div>
                 </div>
             </div>
@@ -57,16 +57,15 @@ export default {
     },
     methods : {
         saveDetails() {
-            var obj = JSON.parse(sessionStorage.getItem("profile"));
+            var obj = {};
+            obj.email = (JSON.parse(sessionStorage.getItem("profile"))).email;
             obj.expectedTurnOver = this.expectedTurnOver;
             obj.singlePaymentIncome = this.singlePaymentIncome;
             obj.singlePaymentOutgoing = this.singlePaymentOutgoing;
             obj.largePaymentReceiveAccount = this.largePaymentReceiveAccount;
             obj.largePaymentTransferAccount = this.largePaymentTransferAccount;
             obj.averageAmountWeek = this.averageAmountWeek;
-            sessionStorage.setItem('profile' , JSON.stringify(obj));
-
-            request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
+            request.saveDetails(obj).then((res) => {
             if (res.data == 1) {
                 this.$router.push({name : "UploadPhotoID"});
             } else {
@@ -78,6 +77,18 @@ export default {
     mounted() {
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
+      } else {
+        var obj = JSON.parse(sessionStorage.getItem("profile"));
+        request.getDetails({
+            email : obj.email
+        }).then((res) => {
+            this.expectedTurnOver = res.data.expectedTurnOver;
+            this.singlePaymentIncome = res.data.singlePaymentIncome;
+            this.singlePaymentOutgoing = res.data.singlePaymentOutgoing;
+            this.largePaymentReceiveAccount = res.data.largePaymentReceiveAccount;
+            this.largePaymentTransferAccount = res.data.largePaymentTransferAccount;
+            this.averageAmountWeek = res.data.averageAmountWeek;
+        });
       }
     }
 }

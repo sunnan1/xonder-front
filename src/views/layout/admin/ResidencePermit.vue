@@ -7,13 +7,14 @@
                 <div class="grid gap-3">
                     <form @submit="formSubmit" enctype="multipart/form-data">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">UK Residence Permit <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">UK Residence Permit <span class="text-red-500">*</span> </label>
                             <input type="file" ref="fileInput" @input="pickFile" class="input input-bordered" v-on:change="onImageChange">
                         </div>
                         <div class="mt-2">
                             <button style="background-color:#2E304E;color:white;border-radius:25px;" class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8">Continue</button>
                         </div>
                     </form>
+                    <a :href="link" v-if="link != ''" style="color:red">See Already Attached Residence Permit</a>
                 </div>
             </div>
       </div>
@@ -27,11 +28,11 @@ export default {
     data () {
         return {
             image: '',
+            link: '',
         }
     },
     methods : {
         onImageChange(e){
-        console.log(e.target.files[0]);
             this.image = e.target.files[0];
         },
         formSubmit(e) {
@@ -49,13 +50,25 @@ export default {
                     alert(res.data)
                 }
             })
-            .catch(function (error) {
+            .catch((error) => {
+                if (this.link != '') {
+                    this.$router.push({name : "UploadPassports"});
+                }
             });
         },
     },
     mounted() {
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
+      } else {
+        var obj = JSON.parse(sessionStorage.getItem("profile"));
+        request.getDetails({
+            email : obj.email
+        }).then((res) => {
+            if (res.data.uk_residence_permit != null && res.data.uk_residence_permit != '' && res.data.uk_residence_permit != NULL && res.data.uk_residence_permit != undefined) {
+                this.link = import.meta.env.VITE_APP_API_URL+"uploads/"+res.data.uk_residence_permit
+            }
+        });
       }
     }
 }

@@ -7,24 +7,24 @@
             <div class="p-10">
                 <div class="grid gap-3">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Business name <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="businessName">
+                            <label class="font-bold mb-2 text-black text-left">Business name <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="businessName" maxlength="100">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Trading Name <span class="text-red-500">*</span> </label>
-                            <input type="email" class="input input-bordered" v-model="tradingName">
+                            <label class="font-bold mb-2 text-black text-left">Trading Name <span class="text-red-500">*</span> </label>
+                            <input type="email" class="input input-bordered" v-model="tradingName" maxlength="100">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Trading Address <span class="text-red-500">*</span> </label>
-                            <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="tradingAddress"></textarea>
+                            <label class="font-bold mb-2 text-black text-left">Trading Address <span class="text-red-500">*</span> </label>
+                            <textarea cols="30" rows="5" maxlength="255" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="tradingAddress"></textarea>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Business Description <span class="text-red-500">*</span> </label>
-                            <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="businessDescription"></textarea>
+                            <label class="font-bold mb-2 text-black text-left">Business Description <span class="text-red-500">*</span> </label>
+                            <textarea cols="30" rows="5" maxlength="255" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="businessDescription"></textarea>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Web Address <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="webAddress">
+                            <label class="font-bold mb-2 text-black text-left">Web Address <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="webAddress" maxlength="30">
                         </div>
                 </div>
             </div>
@@ -52,14 +52,14 @@ export default {
     },
     methods : {
         saveDetails() {
-            var obj = JSON.parse(sessionStorage.getItem("profile"));
+            var obj = {};
+            obj.email = (JSON.parse(sessionStorage.getItem("profile"))).email;
             obj.businessName = this.businessName;
             obj.tradingName = this.tradingName;
             obj.tradingAddress = this.tradingAddress;
             obj.businessDescription = this.businessDescription;
             obj.webAddress = this.webAddress;
-            sessionStorage.setItem('profile' , JSON.stringify(obj));
-            request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
+            request.saveDetails(obj).then((res) => {
                 if (res.data == 1) {
                     this.$router.push({name : "FinancialDetails"});
                 } else {
@@ -76,7 +76,11 @@ export default {
         request.getDetails({
             email : obj.email
         }).then((res) => {
-                console.log(res.data)
+            this.businessName = res.data.businessName;
+            this.tradingName = res.data.tradingName;
+            this.tradingAddress = res.data.tradingAddress;
+            this.businessDescription = res.data.businessDescription;
+            this.webAddress = res.data.webAddress;
         });
       }
     }

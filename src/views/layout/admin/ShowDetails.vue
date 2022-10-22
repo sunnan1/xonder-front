@@ -7,83 +7,83 @@
             <div class="p-10">
                 <div class="grid gap-3">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">First name <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">First name <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="firstName" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Email Address <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Email Address <span class="text-red-500">*</span> </label>
                             <input type="email" class="input input-bordered" v-model="email" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Last name <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Last name <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="lastName " readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Business name <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Business name <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="businessName" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Trading Name <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Trading Name <span class="text-red-500">*</span> </label>
                             <input type="email" class="input input-bordered" v-model="tradingName" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Trading Address <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Trading Address <span class="text-red-500">*</span> </label>
                             <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="tradingAddress" readonly></textarea>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Business Description <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Business Description <span class="text-red-500">*</span> </label>
                             <textarea cols="30" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="businessDescription" readonly></textarea>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Web Address <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Web Address <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="webAddress" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Expected annual turnover (£): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Expected annual turnover (£): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="expectedTurnOver" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average single payment incoming (£): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Average single payment incoming (£): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="singlePaymentIncome" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average single payment outgoing (£): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Average single payment outgoing (£): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="singlePaymentOutgoing" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Typical large payment you would receive into account (£): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Typical large payment you would receive into account (£): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="largePaymentReceiveAccount" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Typical large payment you would transfer out the account (£): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Typical large payment you would transfer out the account (£): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="largePaymentTransferAccount" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Average payment volume per week (number of payments in total in/out the account): <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Average payment volume per week (number of payments in total in/out the account): <span class="text-red-500">*</span> </label>
                             <input type="text" class="input input-bordered" v-model="averageAmountWeek" readonly>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Photo ID <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Photo ID <span class="text-red-500">*</span> </label>
                             <a :href="photoId" class="text-red-500">Check Photo ID</a>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Driving License <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Driving License <span class="text-red-500">*</span> </label>
                             <a :href="license" class="text-red-500">Check Driving License</a>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Residential Permit <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Residential Permit <span class="text-red-500">*</span> </label>
                             <a :href="permit" class="text-red-500">Check Residential Permit</a>
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Passport <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Passport <span class="text-red-500">*</span> </label>
                             <a :href="passport" class="text-red-500">Check Passport</a>
                         </div>
                 </div>
             </div>
           <div class="mt-2">
-            <a v-on:click="complete" :class="{disabled: btnDisabled}" class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8" style="background-color:#2E304E;color:white;border-radius:25px;" href="#">
-              <span>Complete Profile</span>
-            </a>
+            <button v-on:click="complete" :disabled="btnDisabled" class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8" style="background-color:#2E304E;color:white;border-radius:25px;" href="#">
+              <span>{{ btnText }}</span>
+            </button>
           </div>
       </div>
     </div>
@@ -95,6 +95,7 @@ export default {
     name: "Details",
     data () {
         return {
+            btnText : 'Complete Profile',
             btnDisabled : false,
             firstName : '',
             lastName : '',
@@ -114,16 +115,22 @@ export default {
     },
     methods : {
       complete() {
+        this.btnText = 'Please wait !!!';
         this.btnDisabled = true;
         var obj = JSON.parse(sessionStorage.getItem("profile"));
           request.complete({
             email : obj.email
           }).then((res) => {
+            this.btnText = 'Complete Profile';
+            this.btnDisabled = false;
             if (res.data == 1) {
               this.$router.push({name : "ApplicationSubmitted"});
             } else {
               alert(res.data);
             }
+          }).catch((error) => {
+            this.btnText = 'Complete Profile';
+            this.btnDisabled = false;
           });
       }
     },

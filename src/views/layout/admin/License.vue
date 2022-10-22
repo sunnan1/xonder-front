@@ -7,13 +7,14 @@
                 <div class="grid gap-3">
                     <form @submit="formSubmit" enctype="multipart/form-data">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Full / Provisional Driving License <span class="text-red-500">*</span> </label>
+                            <label class="font-bold mb-2 text-black text-left">Full / Provisional Driving License <span class="text-red-500">*</span> </label>
                             <input type="file" ref="fileInput" @input="pickFile" class="input input-bordered" v-on:change="onImageChange">
                         </div>
                         <div class="mt-2">
                             <button style="background-color:#2E304E;color:white;border-radius:25px;" class="block flex items-center justify-center w-full hover:bg-blue-700 p-2 text-md font-semibold text-gray-300 uppercase mt-8">Continue</button>
                         </div>
                     </form>
+                    <a :href="link" v-if="link != ''" style="color:red">See Already Attached License</a>
                 </div>
             </div>
       </div>
@@ -27,11 +28,11 @@ export default {
     data () {
         return {
             image: '',
+            link: '',
         }
     },
     methods : {
         onImageChange(e){
-        console.log(e.target.files[0]);
             this.image = e.target.files[0];
         },
         formSubmit(e) {
@@ -49,13 +50,25 @@ export default {
                     alert(res.data)
                 }
             })
-            .catch(function (error) {
+            .catch((error) => {
+                if (this.link != '') {
+                    this.$router.push({name : "UploadPermits"});
+                }
             });
         },
     },
     mounted() {
       if (! sessionStorage.getItem('profile')) {
           this.$router.push({name : "Details"});
+      } else {
+        var obj = JSON.parse(sessionStorage.getItem("profile"));
+        request.getDetails({
+            email : obj.email
+        }).then((res) => {
+            if (res.data.driving_license != null && res.data.driving_license != '' && res.data.driving_license != NULL && res.data.driving_license != undefined) {
+                this.link = import.meta.env.VITE_APP_API_URL+"uploads/"+res.data.driving_license
+            }
+        });
       }
     }
 }

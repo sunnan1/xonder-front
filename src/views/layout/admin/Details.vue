@@ -7,16 +7,16 @@
             <div class="p-10">
                 <div class="grid gap-3">
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">First name <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="firstName">
+                            <label class="font-bold mb-2 text-black text-left">Email Address <span class="text-red-500">*</span> </label>
+                            <input type="email" class="input input-bordered" v-model="email" v-on:blur="getDetails" maxlength="30">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Email Address <span class="text-red-500">*</span> </label>
-                            <input type="email" class="input input-bordered" v-model="email">
+                            <label class="font-bold mb-2 text-black text-left">First name <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="firstName" maxlength="50">
                         </div>
                         <div class="form-control">
-                            <label class="font-bold mb-2 text-black">Last name <span class="text-red-500">*</span> </label>
-                            <input type="text" class="input input-bordered" v-model="lastName ">
+                            <label class="font-bold mb-2 text-black text-left">Last name <span class="text-red-500">*</span> </label>
+                            <input type="text" class="input input-bordered" v-model="lastName" maxlength="50">
                         </div>
                 </div>
             </div>
@@ -43,18 +43,30 @@ export default {
     methods : {
       saveDetails() {
           sessionStorage.setItem("profile" , JSON.stringify({
-            "firstName" : this.firstName,
-            "lastName" : this.lastName,
             "email" : this.email,
             'accountType' : sessionStorage.getItem('accountType'),
           }));
-          request.saveDetails(JSON.parse(sessionStorage.getItem('profile'))).then((res) => {
+          request.saveDetails({
+            email : this.email,
+            firstName : this.firstName,
+            lastName : this.lastName,
+            accountType : sessionStorage.getItem('accountType')
+          }).then((res) => {
             if (res.data == 1) {
               this.$router.push({name : "BusinessDetails"});
             } else {
               alert(res.data);
             }
           });
+      },
+      getDetails() {
+        request.getDetails({
+          email : this.email
+        })
+        .then((res) => {
+          this.firstName = res.data.firstName;
+          this.lastName = res.data.lastName;
+        })
       }
     },
     mounted() {
